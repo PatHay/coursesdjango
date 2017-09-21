@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Add a student to all bootcamp courses</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #container{
+            height: 100%;
+            width: 100%;
+        }
+
+        table{
+            border: 2px solid black;
+        }
+        #table_header{
+            background-color: grey;
+        }
+        .fieldWrapper{
+            text-align: left;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <h1>Add a new Course</h1>
+        <p>
+        </p>
+        <p>
+            <form action="/add" method="post">
+                {% csrf_token %}
+                <ul style='list-style: none'>
+                    <div class="fieldWrapper">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ form.desc.errors }}
+                        {{ form.desc.label_tag }}
+                        {{ form.desc }}
+                    </div>
+                <input type="submit" value="Add">
+                </ul>
+            </form>
+        </p>
+        <h1>Courses</h1>
+        <table style="width:100%">
+            <thead>
+                <tr id="table_header">
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.desc }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td>
+                        <a href="/{{ course.id }}/remove">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

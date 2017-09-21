@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Delete a course</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+        
+        container{
+            width: 100%;
+            height: 100%;
+        }
+        .form{
+            display: inline-block;
+        }
+        #no{
+            background-color: grey;
+        }
+        #yes{
+            background-color: red;
+            color: white;
+        }
+        #buttons{
+            text-align: center;
+        }
+        #non_buttons{
+            text-align: center;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div id = "non_buttons">
+                <h1>Are you sure you want to delete the following course?</h1>
+                <ul style='list-style : none' id="list">
+                    <li><label>Name:</label>  {{ name }}</li>
+                    <li><label>Description:</label>  {{ desc }}</li>
+                </ul>
+            </div>
+            <div id="buttons">
+                <form action='/' class="form">
+                    <input type="submit" value="No" id="no"> 
+                </form>
+                |
+                <form action='destroy' method='post' class="form">
+                    {% csrf_token %}
+                    <input type="submit" value="Yes! I want to delete!" id="yes">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
